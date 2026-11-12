@@ -1,0 +1,92 @@
+
+=== Q1: Overall churn rate ===
+ total_customers  churned  churn_rate_pct
+            7043     1869            26.5
+
+=== Q2: Churn rate by contract type ===
+      Contract  customers  churned  churn_rate_pct
+Month-to-month       3875     1655            42.7
+      One year       1473      166            11.3
+      Two year       1695       48             2.8
+
+=== Q3: Churn rate by internet service ===
+InternetService  customers  churn_rate_pct
+    Fiber optic       3096            41.9
+            DSL       2421            19.0
+             No       1526             7.4
+
+=== Q4: Churn by tenure group (CASE WHEN) ===
+   tenure_group  customers  churn_rate_pct
+ 1. 0-12 months       2186            47.4
+2. 13-24 months       1024            28.7
+3. 25-48 months       1594            20.4
+  4. 49+ months       2239             9.5
+
+=== Q5: Average monthly charges, churned vs retained ===
+ status  customers  avg_monthly_charges  avg_tenure_months
+ Stayed       5174                61.27               37.6
+Churned       1869                74.44               18.0
+
+=== Q6: Monthly revenue lost to churn ===
+ monthly_revenue_lost  total_monthly_revenue  pct_revenue_lost
+             139131.0               456117.0              30.5
+
+=== Q7: Rank payment methods by churn rate (window function) ===
+            PaymentMethod  churn_rate_pct  churn_rank
+         Electronic check            45.3           1
+             Mailed check            19.1           2
+Bank transfer (automatic)            16.7           3
+  Credit card (automatic)            15.2           4
+
+=== Q8: Do protective services reduce churn? (customers with vs without security and tech support) ===
+ protection  customers  churn_rate_pct
+    Neither       2553            49.0
+        One       1865            21.8
+       Both       1099             9.0
+No internet       1526             7.4
+
+=== Q9: High-risk segment (CTE): month-to-month, fiber optic, tenure up to 12 months ===
+ customers_in_segment  segment_churn_rate_pct  pct_of_all_customers
+                  916                    70.2                  13.0
+
+=== Q10: Churn rate by monthly-charge quartile (NTILE) ===
+ charge_quartile  min_charge  max_charge  churn_rate_pct
+               1       18.25       35.50            11.2
+               2       35.50       70.35            24.6
+               3       70.35       89.85            37.4
+               4       89.85      118.75            32.8
+
+=== Q11: Cumulative share of churners by tenure month (running total) ===
+ tenure  churners  cumulative_churners  cumulative_pct
+      1       380                  380            20.3
+      3        94                  474            25.4
+      6        40                  514            27.5
+     12        38                  552            29.5
+     24        23                  575            30.8
+     36        10                  585            31.3
+     48         9                  594            31.8
+     60         6                  600            32.1
+     72         6                  606            32.4
+
+=== Q12: Churned customers paying above the average monthly charge (subquery) ===
+ churned_above_avg_charge  pct_of_all_churners
+                     1355                 72.5
+
+=== Q13: Churn by number of add-on services ===
+ num_addons  customers  churn_rate_pct
+          0        693            52.2
+          1        966            45.8
+          2       1033            35.8
+          3       1118            27.4
+          4        852            22.3
+          5        571            12.4
+          6        284             5.3
+
+=== Q14: Churn by senior citizen, partner and dependents ===
+ SeniorCitizen Partner Dependents  customers  churn_rate_pct
+             1      No         No        561            49.2
+             1     Yes         No        490            36.3
+             0      No         No       2719            31.2
+             0      No        Yes        353            21.2
+             0     Yes         No       1163            20.8
+             0     Yes        Yes       1666            13.7
